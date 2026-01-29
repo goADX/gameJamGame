@@ -10,6 +10,12 @@ public class PlagueMaskScript : Genral_Mask
     public float doubleJumpCooldown = 1f;
     [Header("Trackers")]
     public float lastDoubleJumpTime = 1f;
+
+    public override void OnInitiate()
+    {
+        
+    }
+
     public override void ability1()
     {
         if(player.IsFacingRight)

@@ -12,8 +12,11 @@ public abstract class Genral_Mask
     {
         player = playerRef;
         maskManager = maskManagerRef;
+        OnInitiate();
     }
-    
+
+
+    public abstract void OnInitiate();
     public abstract void passiveUpdate();
     public abstract void GlobalUpdate();
     public abstract void onEquip();
