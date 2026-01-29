@@ -2,26 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Genral_Mask : MonoBehaviour
+public abstract class Genral_Mask : MonoBehaviour
 {
     object mask;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void ability1();
+    public abstract void ability2();
+    public abstract void TryDoubleJump();
 }
 public enum masks
 {
     defult,
-    type,
+    PlagueMask,
+    GoblinMask,
+    TimeBoyMask
     
 
 
