@@ -6,6 +6,10 @@ public class PlagueMaskScript : Genral_Mask
 {
     public float doubleJumpForce = 8f;
     public GameObject bombPrefab;
+    [Header("CoolDowns")]
+    public float doubleJumpCooldown = 1f;
+    [Header("Trackers")]
+    public float lastDoubleJumpTime = 1f;
     public override void ability1()
     {
         if(player.IsFacingRight)
@@ -40,6 +44,10 @@ public class PlagueMaskScript : Genral_Mask
     public override void passiveUpdate()
     {
         
+    }
+    public override void GlobalUpdate()
+    {
+        lastDoubleJumpTime += Time.deltaTime;
     }
 
     public override void TryDoubleJump()

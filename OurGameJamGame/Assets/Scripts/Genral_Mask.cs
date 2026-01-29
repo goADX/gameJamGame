@@ -15,6 +15,7 @@ public abstract class Genral_Mask
     }
     
     public abstract void passiveUpdate();
+    public abstract void GlobalUpdate();
     public abstract void onEquip();
     public abstract void onUnequip();
     public abstract void ability1();
