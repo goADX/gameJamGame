@@ -5,25 +5,27 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Vector3 velocity;
-    public float speed;
-    public float jumpForce;
+    public float speed = 5f;
+    public float jumpForce = 10f;
     public LayerMask groundLayer;
-    public Rigidbody2D rb;
-    private bool isGrounded;
+    private Rigidbody2D rb;
+    public bool isGrounded = false;
+    public float MinSpeedToInstantatnious = 2f;
+    public float SpeedToStop = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKey(KeyCode.Space)|| Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.UpArrow))
         {
             Jump();
         }
-        if(Physics2D.OverlapCircle(transform.position, 0.1f, groundLayer))
+        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -1, 0), 0.2f, groundLayer)&& rb.velocity.y <= 0)
         {
             isGrounded = true;
         }
@@ -31,15 +33,40 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
         }
+        
         if (isGrounded)
-        {
-            if(Input.GetKeyDown(KeyCode.LeftArrow)|| Input.GetKeyDown(KeyCode.A))
+        {   
+            float SideSpeed = Mathf.Abs(rb.velocity.x);
+            if(SideSpeed < MinSpeedToInstantatnious)
             {
-                rb.velocity = new Vector2(-speed, rb.velocity.y);
+                if(Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))
+                {
+                    rb.velocity = new Vector2(-speed*01f, rb.velocity.y);
+                }else
+                if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                {
+                    rb.velocity = new Vector2(speed*01f, rb.velocity.y);
+                }else if(SideSpeed <= SpeedToStop)
+                {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                }
             }
-            if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            else
             {
-                rb.velocity = new Vector2(speed, rb.velocity.y);
+                
+            
+                if(Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))
+                {
+                    rb.velocity += new Vector2(-speed*Time.deltaTime, rb.velocity.y);
+                }else
+                if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                {
+                    rb.velocity += new Vector2(speed*Time.deltaTime, rb.velocity.y);
+
+                }else if(SideSpeed <= SpeedToStop)
+                {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                }
             }
         }
     }
@@ -49,6 +76,7 @@ public class Player : MonoBehaviour
         if(isGrounded)
         {
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            isGrounded = false;
         }
     }
 
