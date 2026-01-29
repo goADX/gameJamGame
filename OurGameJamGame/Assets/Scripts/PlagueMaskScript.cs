@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlagueMaskScript : Genral_Mask
 {
     public float doubleJumpForce = 8f;
+    public GameObject bombPrefab;
     public override void ability1()
     {
         if(player.IsFacingRight)
