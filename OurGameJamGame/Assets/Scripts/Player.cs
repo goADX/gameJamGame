@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private float lastJumpTime = 0f;
     public MaskManager maskManager;
 
+    public bool IsFacingRight = true;
 
     // Start is called before the first frame update
     void Start()
