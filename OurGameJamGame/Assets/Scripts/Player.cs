@@ -14,12 +14,21 @@ public class Player : MonoBehaviour
     public float SpeedToStop = 0.6f;
     public float jumpCooldown = 0.3f;
     private float lastJumpTime = 0f;
+    public MaskManager maskManager;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        maskManager = GetComponent<MaskManager>();
+        foreach (var mask in maskManager.masksScripts)
+        {
+            if (mask != null)
+            {
+                mask.Initialize(this, maskManager);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -38,6 +47,9 @@ public class Player : MonoBehaviour
             velocity += new Vector3(Physics2D.gravity.x, Physics2D.gravity.y, 0) * Time.deltaTime;
             
         }
+
+        maskManager.currentMaskScript.passiveUpdate();
+
         if(Input.GetKey(KeyCode.Space)|| Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.UpArrow))
         {
             Jump();
@@ -93,11 +105,17 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if(isGrounded && lastJumpTime >= jumpCooldown)
-        {
-            velocity += new Vector3(0f, jumpForce,0f);
-            isGrounded = false;
-            lastJumpTime = 0f;
+        if(lastJumpTime >= jumpCooldown){
+            if(isGrounded)
+            {
+                velocity += new Vector3(0f, jumpForce,0f);
+                isGrounded = false;
+                lastJumpTime = 0f;
+            }
+            else
+            {
+                maskManager.currentMaskScript.TryDoubleJump();
+            }
         }
     }
 

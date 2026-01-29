@@ -2,8 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Genral_Mask : MonoBehaviour
+[System.Serializable]
+public abstract class Genral_Mask 
 {
+    public Player player;
+    public MaskManager maskManager;
+
+    public void Initialize(Player playerRef, MaskManager maskManagerRef)
+    {
+        player = playerRef;
+        maskManager = maskManagerRef;
+    }
     
     public abstract void passiveUpdate();
     public abstract void onEquip();
@@ -11,14 +20,4 @@ public abstract class Genral_Mask : MonoBehaviour
     public abstract void ability1();
     public abstract void ability2();
     public abstract void TryDoubleJump();
-}
-public enum masks
-{
-    defult,
-    PlagueMask,
-    GoblinMask,
-    TimeBoyMask
-    
-
-
 }
