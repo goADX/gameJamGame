@@ -11,7 +11,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     public bool isGrounded = false;
     public float MinSpeedToInstantatnious = 2f;
-    public float SpeedToStop = 0.1f;
+    public float SpeedToStop = 0.6f;
+    public float jumpCooldown = 0.3f;
+    private float lastJumpTime = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +23,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Space)|| Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.UpArrow))
-        {
-            Jump();
-        }
+
+        
         if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.1f, groundLayer)&& velocity.y <= 0)
         {
             isGrounded = true;
@@ -32,7 +32,15 @@ public class Player : MonoBehaviour
         else
         {
             isGrounded = false;
+            //apply gravity
+            velocity += new Vector3(Physics2D.gravity.x, Physics2D.gravity.y, 0) * Time.deltaTime;
+            
         }
+        if(Input.GetKey(KeyCode.Space)|| Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.UpArrow))
+        {
+            Jump();
+        }
+        
         
         if (isGrounded)
         {   
@@ -40,6 +48,7 @@ public class Player : MonoBehaviour
             {
                 velocity = new Vector3(velocity.x, 0, 0);
             }
+
             float moveInput = Input.GetAxis("Horizontal");
             //print(moveInput);
             if(moveInput != 0)
@@ -47,7 +56,7 @@ public class Player : MonoBehaviour
                 if(velocity.magnitude < MinSpeedToInstantatnious|| Mathf.Sign(moveInput) != Mathf.Sign(velocity.x))
                 {
                     //print("hey");
-                    velocity = new Vector3(moveInput * speed, velocity.y , 0);   
+                    velocity = new Vector3(moveInput * MinSpeedToInstantatnious*1.1f, velocity.y , 0);   
                 }
                 else
                 {
@@ -56,9 +65,9 @@ public class Player : MonoBehaviour
             }
             else
             {
-                if (Mathf.Abs(velocity.x) < SpeedToStop)
+                if (Mathf.Abs(velocity.x) <= SpeedToStop)
                 {
-                    velocity = new Vector3(0, velocity.y, 0);
+                    velocity.x = 0;
                 }
 
             }
@@ -71,20 +80,22 @@ public class Player : MonoBehaviour
             
         }
 
-        //apply gravity
-        velocity += new Vector3(Physics2D.gravity.x, Physics2D.gravity.y, 0) * Time.deltaTime;
+        lastJumpTime += Time.deltaTime;
+
         //apply velocity
         transform.position +=  velocity * Time.deltaTime;
         //apply drag
-        velocity *= 0.99f;
+        if(isGrounded)
+        velocity -= 1f * velocity * Mathf.Min(Time.deltaTime*1.2f, 1f);
     }
 
     private void Jump()
     {
-        if(isGrounded)
+        if(isGrounded && lastJumpTime >= jumpCooldown)
         {
             velocity += new Vector3(0f, jumpForce,0f);
             isGrounded = false;
+            lastJumpTime = 0f;
         }
     }
 
