@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
-        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.1f, groundLayer)&& rb.velocity.y <= 0)
+        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.1f, groundLayer)&& velocity.y <= 0)
         {
             isGrounded = true;
         }
@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
             {
                 if(velocity.magnitude < MinSpeedToInstantatnious|| Mathf.Sign(moveInput) != Mathf.Sign(velocity.x))
                 {
+                    print("hey");
                     velocity = new Vector3(moveInput * speed, velocity.y , 0);   
                 }
                 else
