@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public float SpeedToStop = 0.6f;
     public float jumpCooldown = 0.3f;
     private float lastJumpTime = 0f;
+
+    
     // Start is called before the first frame update
     void Start()
     {

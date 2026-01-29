@@ -4,8 +4,10 @@ using UnityEngine;
 
 public abstract class Genral_Mask : MonoBehaviour
 {
-    object mask;
     
+    public abstract void passiveUpdate();
+    public abstract void onEquip();
+    public abstract void onUnequip();
     public abstract void ability1();
     public abstract void ability2();
     public abstract void TryDoubleJump();
