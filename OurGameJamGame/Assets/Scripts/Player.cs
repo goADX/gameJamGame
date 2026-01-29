@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
-        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -1, 0), 0.2f, groundLayer)&& rb.velocity.y <= 0)
+        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.1f, groundLayer)&& rb.velocity.y <= 0)
         {
             isGrounded = true;
         }
@@ -36,38 +36,34 @@ public class Player : MonoBehaviour
         
         if (isGrounded)
         {   
-            float SideSpeed = Mathf.Abs(rb.velocity.x);
-            if(SideSpeed < MinSpeedToInstantatnious)
+            float moveInput = Input.GetAxis("Horizontal");
+            //print(moveInput);
+            if(moveInput != 0)
             {
-                if(Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))
+                if(velocity.magnitude < MinSpeedToInstantatnious|| Mathf.Sign(moveInput) != Mathf.Sign(velocity.x))
                 {
-                    rb.velocity = new Vector2(-speed*01f, rb.velocity.y);
-                }else
-                if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                    velocity = new Vector3(moveInput * speed, velocity.y , 0);   
+                }
+                else
                 {
-                    rb.velocity = new Vector2(speed*01f, rb.velocity.y);
-                }else if(SideSpeed <= SpeedToStop)
-                {
-                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    velocity += new Vector3(moveInput * speed*Time.deltaTime, 0 , 0);     
                 }
             }
             else
             {
-                
-            
-                if(Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))
+                if (Mathf.Abs(velocity.x) < SpeedToStop)
                 {
-                    rb.velocity += new Vector2(-speed*Time.deltaTime, rb.velocity.y);
-                }else
-                if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-                {
-                    rb.velocity += new Vector2(speed*Time.deltaTime, rb.velocity.y);
-
-                }else if(SideSpeed <= SpeedToStop)
-                {
-                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    velocity = new Vector3(0, velocity.y, 0);
                 }
+
             }
+            
+                 
+            
+            
+            
+
+            
         }
     }
 
@@ -75,7 +71,7 @@ public class Player : MonoBehaviour
     {
         if(isGrounded)
         {
-            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            velocity += new Vector3(0f, jumpForce,0f);
             isGrounded = false;
         }
     }
