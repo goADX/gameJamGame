@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Velocity velocity;
+    public Vector3 velocity;
+    public float speed;
     public float jumpForce;
     public LayerMask groundLayer;
     public Rigidbody2D rb;
@@ -34,11 +35,11 @@ public class Player : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.LeftArrow)|| Input.GetKeyDown(KeyCode.A))
             {
-                rb.velocity = new Vector2(-velocity.speed, rb.velocity.y);
+                rb.velocity = new Vector2(-speed, rb.velocity.y);
             }
             if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
-                rb.velocity = new Vector2(velocity.speed, rb.velocity.y);
+                rb.velocity = new Vector2(speed, rb.velocity.y);
             }
         }
     }
