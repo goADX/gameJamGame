@@ -11,9 +11,9 @@ public class PlagueMaskScript : Genral_Mask
     [Header("Trackers")]
     public float lastDoubleJumpTime = 1f;
 
-    public override void OnInitiate()
+    public override void OnInitiate(GameObject[] Preferbs)
     {
-        
+        bombPrefab = Preferbs[0];
     }
 
     public override void ability1()
@@ -58,6 +58,11 @@ public class PlagueMaskScript : Genral_Mask
 
     public override void TryDoubleJump()
     {
+        if(lastDoubleJumpTime < doubleJumpCooldown)
+        {
+            return;
+        }
+        lastDoubleJumpTime = 0f;
         player.velocity += new Vector3(0f, player.jumpForce,0f);
         if(player.velocity.x == 0f)
         {

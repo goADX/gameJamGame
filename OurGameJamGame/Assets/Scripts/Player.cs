@@ -23,13 +23,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         maskManager = GetComponent<MaskManager>();
-        foreach (var mask in maskManager.masksScripts)
-        {
-            if (mask != null)
-            {
-                mask.Initialize(this, maskManager);
-            }
-        }
+        
     }
 
     // Update is called once per frame
@@ -49,9 +43,7 @@ public class Player : MonoBehaviour
             
         }
 
-        maskManager.currentMaskScript.passiveUpdate();
-
-        if(Input.GetKey(KeyCode.Space)|| Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.UpArrow))
+        if(Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.W)|| Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
         }
@@ -115,7 +107,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                maskManager.currentMaskScript.TryDoubleJump();
+                maskManager.TryDoubleJump();
             }
         }
     }

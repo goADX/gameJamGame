@@ -21,11 +21,24 @@ public class MaskManager : MonoBehaviour
     public Genral_Mask currentMaskScript;
     [SerializeField]
     [Header("put in the same order as the enum masks")]
-    public Genral_Mask[] masksScripts = new Genral_Mask[3]{null,null,null};
+    public Genral_Mask[] masksScripts = new Genral_Mask[3]{new PlagueMaskScript(),null,null};
+
+
+    [Header("Put here the prefabs of the masks")]
+    public GameObject bombPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Player playerRef = GetComponent<Player>();
+        foreach (var mask in masksScripts)
+        {
+            if (mask != null)
+            {
+                mask.Initialize(playerRef, this);
+            }
+        }
+        masksScripts[0].OnInitiate(new GameObject[1]{bombPrefab});
+
     }
 
     // Update is called once per frame
@@ -46,6 +59,17 @@ public class MaskManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha4))
         {
             EquipMask(masks.TimeBoyMask);
+        }
+        if(currentMask != masks.none)
+        {
+            currentMaskScript.passiveUpdate();
+        }
+        foreach (var mask in masksScripts)
+        {
+            if (mask != null)
+            {
+                mask.GlobalUpdate();
+            }
         }
     }
     public void EquipMask(masks maskToEquip)
@@ -79,6 +103,13 @@ public class MaskManager : MonoBehaviour
         if(currentMask != masks.none)
         {
             currentMaskScript.ability2();
+        }
+    }
+    public void TryDoubleJump()
+    {
+        if(currentMask != masks.none)
+        {
+            currentMaskScript.TryDoubleJump();
         }
     }
 }
