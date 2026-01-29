@@ -36,13 +36,17 @@ public class Player : MonoBehaviour
         
         if (isGrounded)
         {   
+            if(velocity.y < 0)
+            {
+                velocity = new Vector3(velocity.x, 0, 0);
+            }
             float moveInput = Input.GetAxis("Horizontal");
             //print(moveInput);
             if(moveInput != 0)
             {
                 if(velocity.magnitude < MinSpeedToInstantatnious|| Mathf.Sign(moveInput) != Mathf.Sign(velocity.x))
                 {
-                    print("hey");
+                    //print("hey");
                     velocity = new Vector3(moveInput * speed, velocity.y , 0);   
                 }
                 else
@@ -66,6 +70,13 @@ public class Player : MonoBehaviour
 
             
         }
+
+        //apply gravity
+        velocity += new Vector3(Physics2D.gravity.x, Physics2D.gravity.y, 0) * Time.deltaTime;
+        //apply velocity
+        transform.position +=  velocity * Time.deltaTime;
+        //apply drag
+        velocity *= 0.99f;
     }
 
     private void Jump()
