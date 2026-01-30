@@ -60,6 +60,14 @@ public class Player : MonoBehaviour
             }
 
             float moveInput = Input.GetAxis("Horizontal");
+            if(moveInput > 0)
+            {
+                IsFacingRight = true;
+            }
+            else if (moveInput < 0)
+            {
+                IsFacingRight = false;
+            }
             //print(moveInput);
             if(moveInput != 0)
             {
