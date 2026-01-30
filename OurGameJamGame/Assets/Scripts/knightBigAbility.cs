@@ -9,6 +9,8 @@ public class knightBigAbility : MonoBehaviour
     public GameObject FirstStageVFX;
     public float SecondStageTime = 2f;
     public GameObject SecondStageVFX;
+
+    public GameObject DamageVFX;
     public bool facingRight = true;
     public float Range = 4f;
     public GameObject[] EnemiesTargeted;
@@ -74,6 +76,10 @@ public class knightBigAbility : MonoBehaviour
             transform.position = FurthestEnemyPos;
             CurrentStage = 3;
 
+        }
+        if(CurrentStage == 3)
+        {
+            Destroy(this.gameObject);
         }
 
 
