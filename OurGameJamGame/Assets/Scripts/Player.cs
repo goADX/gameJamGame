@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     {
 
         
-        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.1f, groundLayer)&& velocity.y <= 0)
+        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.2f, groundLayer)&& velocity.y <= 0)
         {
             isGrounded = true;
         }

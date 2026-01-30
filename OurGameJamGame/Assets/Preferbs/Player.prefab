@@ -219,7 +219,8 @@ MonoBehaviour:
     type: 3}
   smallAttackPrefab: {fileID: 2469518716695907044, guid: 3e02024a87eced34bb28f747c62c00b4,
     type: 3}
-  heavyAttackPrefab: {fileID: 0}
+  heavyAttackPrefab: {fileID: 6579106636198657385, guid: 8d5752d1991335849b85201afbd73eac,
+    type: 3}
   attackBelowPrefab: {fileID: 534635876550849138, guid: 22e3484137d697443ad30b2158527cd9,
     type: 3}
   shieldPrefab: {fileID: 0}
@@ -240,6 +241,7 @@ MonoBehaviour:
   framesPerSecondRun: 10
   framesPerSecondAir: 12
   frameTimer: 0
+  facingRight: 1
 --- !u!1001 &2299682611002847463
 PrefabInstance:
   m_ObjectHideFlags: 0
