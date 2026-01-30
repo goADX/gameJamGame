@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8142379456615430424}
   - component: {fileID: 4503018673313400962}
   - component: {fileID: 5769970979087115614}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RedEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
