@@ -64,6 +64,16 @@ public class MaskManager : MonoBehaviour
         {
             currentMaskScript.passiveUpdate();
         }
+
+        if(Input.GetKeyDown(KeyCode.E)|| Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            ability1();
+        }
+        if(Input.GetKeyDown(KeyCode.Q)|| Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            ability2();
+        }
+        
         foreach (var mask in masksScripts)
         {
             if (mask != null)
