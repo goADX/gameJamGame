@@ -2,16 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnightMaskAbilities : MonoBehaviour
+public class KnightMaskAbilities : Genral_Mask
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnInitiate(GameObject[] preferbs)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ability1()
+    {
+        
+    }
+
+    public override void ability2()
+    {
+        
+    }
+
+    public override void onEquip()
+    {
+        
+    }
+
+    public override void onUnequip()
+    {
+        
+    }
+
+    public override void passiveUpdate()
+    {
+        
+    }
+
+    public override void GlobalUpdate()
+    {
+        
+    }
+    public override void TryDoubleJump()
     {
         
     }
