@@ -141,6 +141,13 @@ public class EnemyScript : MonoBehaviour
             other.GetComponent<Player>().ReciveDamage(Damage);
         }
     }
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.layer == PlayerLayer)
+        {
+            //take damage
+            other.gameObject.GetComponent<Player>().ReciveDamage(Damage);
+        }
+    }
 
     public void ReciveDamage(float DamageGot)
     {
