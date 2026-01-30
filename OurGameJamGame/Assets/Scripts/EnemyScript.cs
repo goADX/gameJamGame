@@ -122,7 +122,6 @@ public class EnemyScript : MonoBehaviour
         }
         transform.position += velocity * Time.deltaTime;
         velocity += velocity * -0.1f * Time.deltaTime;
-        
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.layer == PlayerAttacks)
@@ -138,6 +137,7 @@ public class EnemyScript : MonoBehaviour
         if(other.gameObject.layer == PlayerLayer)
         {
             //take damage
+            print("heell");
             other.GetComponent<Player>().ReciveDamage(Damage);
         }
     }
