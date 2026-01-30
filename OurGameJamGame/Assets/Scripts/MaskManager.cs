@@ -15,13 +15,23 @@ public enum masks
 }
 public class MaskManager : MonoBehaviour
 {
+    public LayerMask HurtMeMask;
+    public LayerMask EnemyMask;
+    public LayerMask EnemyAttacksMask;
+
+    public GameObject[] PlagueEquipments;
+    public GameObject[] KnightEquipments;
+    public GameObject[] TimeBoyEquipments;
+
+
+
     [SerializeField]
     public masks currentMask = masks.none;
 
     public Genral_Mask currentMaskScript;
     [SerializeField]
     [Header("put in the same order as the enum masks")]
-    public Genral_Mask[] masksScripts = new Genral_Mask[3]{new PlagueMaskScript(),new KnightMaskAbilities(),null};
+    public Genral_Mask[] masksScripts = new Genral_Mask[3]{new PlagueMaskScript(),new KnightMaskAbilities(),new TimeBoyMaskScript()};
 
 
     [Header("Put here the prefabs of the masks")]

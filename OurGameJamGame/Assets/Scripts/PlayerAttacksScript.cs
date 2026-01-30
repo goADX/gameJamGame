@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAttacksScript : MonoBehaviour
 {
+
+    public float Damage = 50;
     // Start is called before the first frame update
     void Start()
     {

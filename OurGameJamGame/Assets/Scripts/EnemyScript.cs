@@ -14,11 +14,13 @@ public class EnemyScript : MonoBehaviour
     }
     public EnemyMovementType enemyMovementType;
     public LayerMask PlayerAttacks;
+    public LayerMask GroundMask;
     [Header("Stats")]
     public float health = 100f;
     public float Damage = 10f;
     [Header("Special Stats")]
     public float moveSpeed = 2f;
+    public bool currentlyFacingRight = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,31 @@ public class EnemyScript : MonoBehaviour
                 break;
             case EnemyMovementType.PatrolRightToLeft:
                 //patrol code here
+                if(currentlyFacingRight)
+                {
+                    if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, -0.5f, 0), 0.1f, GroundMask) )
+                    {
+                     currentlyFacingRight = false;   
+                    }
+                }
+                else
+                {
+                    if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, -0.5f, 0), 0.1f, GroundMask) )
+                    {
+                     currentlyFacingRight = true;   
+                    }
+                    
+                }
+
+                if (currentlyFacingRight)
+                {
+                    transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+
+                }else
+                {
+                    transform.Translate(-Vector3.right * moveSpeed * Time.deltaTime);
+                    
+                }
                 break;
             case EnemyMovementType.ChasePlayer:
                 //chase player code here
@@ -46,11 +73,26 @@ public class EnemyScript : MonoBehaviour
         {
             //take damage
             Destroy(other.gameObject);
-            health -= 20f;
+            ReciveDamage(other.GetComponent<PlayerAttacksScript>().Damage);
             if(health <= 0f)
             {
-                Destroy(gameObject);
+               Die();
             }
         }
+    }
+
+    public void ReciveDamage(float DamageGot)
+    {
+        health -= DamageGot;
+        if(health <= 0f)
+        {
+           Die();
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+
     }
 }

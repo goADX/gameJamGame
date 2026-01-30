@@ -9,15 +9,17 @@ public class KnightMaskAbilities : Genral_Mask
     public GameObject AttackBelowPrefab;
     public GameObject ShieldPrefab;
 
-    public float DashDownForce = 10f;
+    public float DashDownForce = 20f;
 
     [Header("Ability Cooldowns")]
     public float SmallAttackCooldown = 1f;
     public float HeavyAttackCooldown = 3f;
+    public float ShieldBashCooldown = 5f;
 
     [Header("Ability Trackers")]
     public float SmallAttackLastUsed = 1f;
     public float HeavyAttackLastUsed = 3f;
+    public float ShieldBashLastUsed = 5f;
 
     public GameObject currentAttackBelowInstance;
     public override void OnInitiate(GameObject[] preferbs)
@@ -30,12 +32,20 @@ public class KnightMaskAbilities : Genral_Mask
 
     public override void ability1()
     {
-        
+        if(SmallAttackLastUsed >= SmallAttackCooldown)
+        {
+            GameObject.Instantiate(SmallAttackPrefab, player.transform.position + new Vector3((player.IsFacingRight ? 1f : -1f) * 1f, 0f, 0f), Quaternion.identity);
+            SmallAttackLastUsed = 0f;
+        }
     }
 
     public override void ability2()
     {
-        
+        if(HeavyAttackLastUsed >= HeavyAttackCooldown)
+        {
+            GameObject.Instantiate(HeavyAttackPrefab, player.transform.position + new Vector3((player.IsFacingRight ? 1f : -1f) * 1f, 0f, 0f), Quaternion.identity);
+            HeavyAttackLastUsed = 0f;
+        }
     }
 
     public override void onEquip()
