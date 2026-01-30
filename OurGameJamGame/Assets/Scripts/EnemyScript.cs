@@ -39,7 +39,7 @@ public class EnemyScript : MonoBehaviour
         if (!canFly)
         {
             
-            if(Physics2D.OverlapCircle(transform.position + new Vector3(0f, -0.5f, 0), 0.2f, GroundMask))
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(0f, -0.5f, 0), 0f, GroundMask))
             {
                 IsGrounded = true;
             }
@@ -49,12 +49,12 @@ public class EnemyScript : MonoBehaviour
             }
             if(!IsGrounded)
             {
-                velocity += new Vector3(0, -gravity, 0) * Time.deltaTime;
+                velocity.y -= gravity * Time.deltaTime;
                 
             }
-            else
+            else if (velocity.y < 0)
             {
-                velocity = new Vector3(velocity.x, Mathf.Max(velocity.y, 0f), 0f);
+            velocity.y = 0;
             }
         }
         switch(enemyMovementType)
@@ -86,7 +86,7 @@ public class EnemyScript : MonoBehaviour
 
                 }else
                 {
-                    velocity += -Vector3.right * moveSpeed * Time.deltaTime;
+                    velocity -= Vector3.right * moveSpeed * Time.deltaTime;
                     
                 }
                 break;
