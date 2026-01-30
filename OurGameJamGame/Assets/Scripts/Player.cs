@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 
 
     public float health = 3;
+    public bool HeartsSystem = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -114,9 +115,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ReciveDamage(float DamageGot)
+    public void ReciveDamage(float DamageGot = 1f)
     {
-        health -= DamageGot;
+        if(HeartsSystem)
+        {
+            health -= 1;            
+        }else
+        {
+            health -= DamageGot;
+   
+        }
         if(health <= 0f)
         {
            Die();
