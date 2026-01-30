@@ -26,6 +26,7 @@ public class EnemyScript : MonoBehaviour
     public float gravity = 9.8f;
     [Header("Trackers")]
     public bool IsGrounded = false;
+    public bool IsWallGrounded = false;
     public Vector3 velocity;
     // Start is called before the first frame update
     void Start()
@@ -55,6 +56,12 @@ public class EnemyScript : MonoBehaviour
             else if (velocity.y < 0)
             {
             velocity.y = 0;
+            }
+            Vector3 wallCheckPos = currentlyFacingRight ? new Vector3(0.5f, 0, 0) : new Vector3(-0.5f, 0, 0);
+
+            if (Physics2D.OverlapCircle(transform.position + wallCheckPos, 0.1f, GroundMask))
+            {
+                velocity.x = 0;
             }
         }
         switch(enemyMovementType)
