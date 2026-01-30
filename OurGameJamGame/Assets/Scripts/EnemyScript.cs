@@ -57,6 +57,7 @@ public class EnemyScript : MonoBehaviour
             {
             velocity.y = 0;
             }
+
             Vector3 wallCheckPos = currentlyFacingRight ? new Vector3(0.5f, 0, 0) : new Vector3(-0.5f, 0, 0);
 
             if (Physics2D.OverlapCircle(transform.position + wallCheckPos, 0.1f, GroundMask))
@@ -111,7 +112,7 @@ public class EnemyScript : MonoBehaviour
 
                 }else
                 {
-                    velocity += -Vector3.right * moveSpeed * Time.deltaTime;                        
+                    velocity -= Vector3.right * moveSpeed * Time.deltaTime;                        
                 }
 
                 }
@@ -121,6 +122,7 @@ public class EnemyScript : MonoBehaviour
         }
         transform.position += velocity * Time.deltaTime;
         velocity += velocity * -0.1f * Time.deltaTime;
+        
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.layer == PlayerAttacks)
@@ -132,6 +134,12 @@ public class EnemyScript : MonoBehaviour
             {
                Die();
             }
+        }
+        if(other.gameObject.layer == PlayerLayer)
+        {
+            //take damage
+            print("hello");
+            other.GetComponent<Player>().ReciveDamage(Damage);
         }
     }
 
