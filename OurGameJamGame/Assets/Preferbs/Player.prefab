@@ -216,7 +216,8 @@ MonoBehaviour:
   currentMask: 0
   bombPrefab: {fileID: 2610911171392262682, guid: 4a5cc01d2b8536c49bfa1bfcc6f600d0,
     type: 3}
-  smallAttackPrefab: {fileID: 0}
+  smallAttackPrefab: {fileID: 2469518716695907044, guid: 3e02024a87eced34bb28f747c62c00b4,
+    type: 3}
   heavyAttackPrefab: {fileID: 0}
   attackBelowPrefab: {fileID: 534635876550849138, guid: 22e3484137d697443ad30b2158527cd9,
     type: 3}

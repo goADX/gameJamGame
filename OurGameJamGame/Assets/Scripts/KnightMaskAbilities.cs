@@ -36,6 +36,11 @@ public class KnightMaskAbilities : Genral_Mask
         {
             GameObject.Instantiate(SmallAttackPrefab, player.transform.position + new Vector3((player.IsFacingRight ? 1f : -1f) * 1f, 0f, 0f), Quaternion.identity);
             SmallAttackLastUsed = 0f;
+            //correct the collider direction and the sprite direction
+            if(!player.IsFacingRight)
+            {
+                SmallAttackPrefab.transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
         }
     }
 
@@ -45,6 +50,10 @@ public class KnightMaskAbilities : Genral_Mask
         {
             GameObject.Instantiate(HeavyAttackPrefab, player.transform.position + new Vector3((player.IsFacingRight ? 1f : -1f) * 1f, 0f, 0f), Quaternion.identity);
             HeavyAttackLastUsed = 0f;
+            if(!player.IsFacingRight)
+            {
+                HeavyAttackPrefab.transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
         }
     }
 
