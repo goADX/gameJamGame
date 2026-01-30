@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class knightBigAbility : MonoBehaviour
 {
+    public LayerMask TargetablesMask;
     public float FirstStageTime = 2f;
+    public GameObject FirstStageVFX;
     public float SecondStageTime = 2f;
+    public GameObject SecondStageVFX;
+    public bool facingRight = true;
+    public float Range = 4f;
+    public GameObject[] EnemiesTargeted;
+    public float Timer = 0f;
+    public int CurrentStage = 0; //0 not started 1 first stage 2 second stage 3 ended
 
     /*
     we will first make big rectange, detect all enemies in the rectangle
@@ -17,12 +26,63 @@ public class knightBigAbility : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(CurrentStage == 0)
+        {
+            EnemiesTargeted = Physics2D.OverlapBoxAll(transform.position + new Vector3(facingRight?Range:-Range,0,0), new Vector3(Range,3f,1f), 0f, TargetablesMask);
+            Instantiate(FirstStageVFX, transform.position, Quaternion.identity);
+            CurrentStage = 1;
+        }else if(CurrentStage == 1&& Timer >= FirstStageTime)
+        {
+            //summon VFX on each enemy
+            foreach(GameObject enemy in EnemiesTargeted)
+            {
+                Instantiate(SecondStageVFX, enemy.transform.position, Quaternion.identity);
+            }
+            CurrentStage = 2;
+            Timer = 0f;
         
+            //summon VFX ontop of each enemy
+
+
+        }else if(CurrentStage == 2&& Timer >= SecondStageTime)
+        {
+            
+            Vector3 FurthestEnemyPos = transform.position;
+            float FurthestDistance = 0f;
+            foreach(GameObject enemy in EnemiesTargeted)
+            {
+                //deal damage
+                EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
+                if(enemyScript != null)
+                {
+                    enemyScript.health -= 50f; //deal 50 damage
+                }
+                //find furthest enemy
+                float distance = Vector3.Distance(transform.position, enemy.transform.position);
+                if(distance > FurthestDistance)
+                {
+                    FurthestDistance = distance;
+                    FurthestEnemyPos = enemy.transform.position;
+                }
+            }
+            //teleport to furthest enemy
+            transform.position = FurthestEnemyPos;
+            CurrentStage = 3;
+
+        }
+
+
+
+
+
+
+
+
+     Timer += Time.deltaTime;   
     }
 }
