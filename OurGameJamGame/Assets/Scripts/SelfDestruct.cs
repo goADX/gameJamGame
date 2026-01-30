@@ -13,6 +13,10 @@ public class SelfDestruct : MonoBehaviour
     {
         Destroy(gameObject, TimeToDestruct);
     }
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
     private void OnDestroy()
     {
         if(SummonedAfterDestruct != null)

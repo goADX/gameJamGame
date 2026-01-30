@@ -21,11 +21,15 @@ public class MaskManager : MonoBehaviour
     public Genral_Mask currentMaskScript;
     [SerializeField]
     [Header("put in the same order as the enum masks")]
-    public Genral_Mask[] masksScripts = new Genral_Mask[3]{new PlagueMaskScript(),null,null};
+    public Genral_Mask[] masksScripts = new Genral_Mask[3]{new PlagueMaskScript(),new KnightMaskAbilities(),null};
 
 
     [Header("Put here the prefabs of the masks")]
     public GameObject bombPrefab;
+    public GameObject smallAttackPrefab;
+    public GameObject heavyAttackPrefab;
+    public GameObject attackBelowPrefab;
+    public GameObject shieldPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +42,7 @@ public class MaskManager : MonoBehaviour
             }
         }
         masksScripts[0].OnInitiate(new GameObject[1]{bombPrefab});
+        masksScripts[1].OnInitiate(new GameObject[4]{smallAttackPrefab, heavyAttackPrefab, attackBelowPrefab, shieldPrefab});
 
     }
 
