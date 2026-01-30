@@ -134,19 +134,15 @@ public class EnemyScript : MonoBehaviour
                Die();
             }
         }
-        if(other.gameObject.layer == PlayerLayer)
-        {
-            //take damage
-            print("heell");
-            other.GetComponent<Player>().ReciveDamage(Damage);
-        }
     }
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.layer == PlayerLayer)
+        if(( other.gameObject.layer & (1 << PlayerLayer)) != 0)
         {
             //take damage
+            print("Damge taken");
             other.gameObject.GetComponent<Player>().ReciveDamage(Damage);
         }
+        
     }
 
     public void ReciveDamage(float DamageGot)
