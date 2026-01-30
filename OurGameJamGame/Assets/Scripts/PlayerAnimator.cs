@@ -21,6 +21,8 @@ public class PlayerAnimator : MonoBehaviour
     {
         get{ return maskManager.currentMask; }
     }
+
+    public bool facingRight = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,8 +51,19 @@ public class PlayerAnimator : MonoBehaviour
                 material.SetFloat("_Mask", 0);
                 break;
         }
-
+        
         Player player = GetComponent<Player>();
+        facingRight = player.IsFacingRight;
+
+        if (!facingRight)
+        {
+            material.SetFloat("_Flip", 1);
+        }
+        else
+        {
+            material.SetFloat("_Flip", 0);
+        }
+
         if (!player.isGrounded)
         {
             if(frameTimer >= 1f / framesPerSecondAir)

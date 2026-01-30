@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 602853533476089458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8004470897945053695}
   m_Father: {fileID: 0}
@@ -219,7 +219,8 @@ MonoBehaviour:
     type: 3}
   smallAttackPrefab: {fileID: 2469518716695907044, guid: 3e02024a87eced34bb28f747c62c00b4,
     type: 3}
-  heavyAttackPrefab: {fileID: 0}
+  heavyAttackPrefab: {fileID: 6579106636198657385, guid: 8d5752d1991335849b85201afbd73eac,
+    type: 3}
   attackBelowPrefab: {fileID: 534635876550849138, guid: 22e3484137d697443ad30b2158527cd9,
     type: 3}
   shieldPrefab: {fileID: 0}
@@ -240,6 +241,7 @@ MonoBehaviour:
   framesPerSecondRun: 10
   framesPerSecondAir: 12
   frameTimer: 0
+  facingRight: 1
 --- !u!1001 &2299682611002847463
 PrefabInstance:
   m_ObjectHideFlags: 0

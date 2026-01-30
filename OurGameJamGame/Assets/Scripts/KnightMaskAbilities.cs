@@ -81,6 +81,9 @@ public class KnightMaskAbilities : Genral_Mask
             currentAttackBelowInstance = null;
             player.velocity = new Vector3(0f, 0f, 0f);
         }
+        SmallAttackLastUsed += Time.deltaTime;
+        HeavyAttackLastUsed += Time.deltaTime;
+        ShieldBashLastUsed += Time.deltaTime;
     }
     public override void TryDoubleJump()
     {
