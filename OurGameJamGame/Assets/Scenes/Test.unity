@@ -387,8 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
-  m_Bindings:
-  - {fileID: 521962574}
+  m_Bindings: []
   m_VisualEffect: {fileID: 521962572}
 --- !u!1 &977610156
 GameObject:
@@ -658,6 +657,7 @@ MonoBehaviour:
   maskManager: {fileID: 0}
   IsFacingRight: 1
   health: 3
+  HeartsSystem: 1
 --- !u!50 &1408101443
 Rigidbody2D:
   serializedVersion: 4
@@ -728,7 +728,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.15, y: 1}
+  m_Size: {x: 0.76, y: 0.94}
   m_EdgeRadius: 0
 --- !u!212 &1408101445
 SpriteRenderer:
@@ -750,7 +750,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f1f0a697f47c9a5479718572912038a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -813,13 +813,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HurtMeMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 3328
   EnemyMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   EnemyAttacksMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   PlagueEquipments: []
   KnightEquipments:
   - {fileID: 521962570}
@@ -1060,6 +1060,7 @@ MonoBehaviour:
   canFly: 0
   gravity: 9.8
   IsGrounded: 0
+  IsWallGrounded: 0
   velocity: {x: 0, y: 0, z: 0}
 --- !u!61 &1801230764
 BoxCollider2D:
@@ -1442,6 +1443,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RedEye
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474349134412921799, guid: 3a8cdfa747811b24e9e69ff60c64fcc6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769970979087115614, guid: 3a8cdfa747811b24e9e69ff60c64fcc6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8142379456615430424, guid: 3a8cdfa747811b24e9e69ff60c64fcc6,
         type: 3}
