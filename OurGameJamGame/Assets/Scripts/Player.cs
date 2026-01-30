@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     public bool IsFacingRight = true;
 
+
+    public float health = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -110,6 +112,21 @@ public class Player : MonoBehaviour
                 maskManager.TryDoubleJump();
             }
         }
+    }
+
+    public void ReciveDamage(float DamageGot)
+    {
+        health -= DamageGot;
+        if(health <= 0f)
+        {
+           Die();
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+
     }
 
 }
