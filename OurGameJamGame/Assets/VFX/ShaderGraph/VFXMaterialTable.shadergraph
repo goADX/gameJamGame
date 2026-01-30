@@ -17,6 +17,9 @@
         },
         {
             "m_Id": "eae0f0427bce4cbb9804bf40319b2b8e"
+        },
+        {
+            "m_Id": "ba12d38ba1ca480da1bde73d972a9e54"
         }
     ],
     "m_Keywords": [],
@@ -1066,6 +1069,9 @@
         },
         {
             "m_Id": "eae0f0427bce4cbb9804bf40319b2b8e"
+        },
+        {
+            "m_Id": "ba12d38ba1ca480da1bde73d972a9e54"
         }
     ]
 }
@@ -1991,6 +1997,33 @@
         "z": 0.0,
         "w": 0.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DArrayShaderProperty",
+    "m_ObjectId": "ba12d38ba1ca480da1bde73d972a9e54",
+    "m_Guid": {
+        "m_GuidSerialized": "287c8f73-7082-402b-ab30-289b6a327954"
+    },
+    "m_Name": "Texture2D Array",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Texture2D Array",
+    "m_DefaultReferenceName": "_Texture2D_Array",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "m_SerializedTexture": "{\"textureArray\":{\"instanceID\":0}}",
+        "m_Guid": ""
+    },
+    "m_Modifiable": true
 }
 
 {
