@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class Player : MonoBehaviour
 
     public bool IsFacingRight = true;
 
-
+    public GameObject MainCamera;
     public float health = 3;
     public bool HeartsSystem = true;
     // Start is called before the first frame update
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour
     {
 
         
-        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.2f, groundLayer)&& velocity.y <= 0)
+        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.1f, groundLayer)&& velocity.y <= 0)
         {
             isGrounded = true;
         }
@@ -60,14 +61,6 @@ public class Player : MonoBehaviour
             }
 
             float moveInput = Input.GetAxis("Horizontal");
-            if(moveInput > 0)
-            {
-                IsFacingRight = true;
-            }
-            else if (moveInput < 0)
-            {
-                IsFacingRight = false;
-            }
             //print(moveInput);
             if(moveInput != 0)
             {
@@ -98,7 +91,16 @@ public class Player : MonoBehaviour
             {
                 velocity.x = Mathf.Max(0f, velocity.x);
             }
-            
+            if (transform.position.x >= 18f)
+            {
+            // LOCK CAMERA: Stay at this specific spot
+                MainCamera.transform.position = new Vector3(29.53f, 1f, -10f);
+            }
+            else
+            {
+                // FOLLOW PLAYER: Standard movement
+                MainCamera.transform.position = new Vector3(3.4f, 1f, -10f);
+            }
             
             
 
@@ -148,8 +150,11 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
-
+        RestartGame();
     }
-
+    public void RestartGame()
+    {
+        // Get the name of the current scene and reload it
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
