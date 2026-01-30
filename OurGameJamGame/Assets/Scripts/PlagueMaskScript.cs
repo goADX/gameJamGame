@@ -88,6 +88,6 @@ public class PlagueMaskScript : Genral_Mask
     }
     public void throwBomb(Vector3 direction)
     {
-        
+        GameObject.Instantiate(bombPrefab, direction + player.transform.position, Quaternion.identity);
     }
 }

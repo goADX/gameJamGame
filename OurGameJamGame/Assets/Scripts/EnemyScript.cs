@@ -17,7 +17,7 @@ public class EnemyScript : MonoBehaviour
     public LayerMask PlayerAttacks;
     public LayerMask GroundMask;
     [Header("Stats")]
-    public float health = 100f;
+    public float health = 1f;
     public float Damage = 10f;
     [Header("Special Stats")]
     public float moveSpeed = 2f;
@@ -28,10 +28,11 @@ public class EnemyScript : MonoBehaviour
     public bool IsGrounded = false;
     public bool IsWallGrounded = false;
     public Vector3 velocity;
+    public SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -77,6 +78,7 @@ public class EnemyScript : MonoBehaviour
                     if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, 0, 0), 0.1f, GroundMask) )
                     {
                      currentlyFacingRight = false;   
+
                     }
                 }
                 else
@@ -120,8 +122,13 @@ public class EnemyScript : MonoBehaviour
 
                 break;
         }
+        spriteRenderer.flipX = !currentlyFacingRight;
         transform.position += velocity * Time.deltaTime;
         velocity += velocity * -0.1f * Time.deltaTime;
+        if(health <= 0f)
+        {
+           Die();
+        }
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.layer == PlayerAttacks)

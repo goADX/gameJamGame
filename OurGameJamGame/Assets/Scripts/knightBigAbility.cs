@@ -35,7 +35,7 @@ public class knightBigAbility : MonoBehaviour
     {
         if(CurrentStage == 0)
         {
-            EnemiesTargetedColliders = Physics2D.OverlapBoxAll(transform.position + new Vector3(facingRight?Range:-Range,0,0), new Vector3(Range,3f,1f), 0f, TargetablesMask);
+            EnemiesTargetedColliders = Physics2D.OverlapBoxAll(transform.position + new Vector3(facingRight?Range:-Range,0,0), new Vector3(Range,2f,1f), 0f, TargetablesMask);
             Instantiate(FirstStageVFX, transform.position, Quaternion.identity);
             CurrentStage = 1;
             EnemiesTargeted = new GameObject[EnemiesTargetedColliders.Length];
@@ -94,6 +94,6 @@ public class knightBigAbility : MonoBehaviour
 
 
 
-     Timer += Time.deltaTime;   
+        Timer += Time.deltaTime;   
     }
 }
