@@ -40,6 +40,7 @@ public class KnightMaskAbilities : Genral_Mask
             if(!player.IsFacingRight)
             {
                 SmallAttackPrefab.transform.localScale = new Vector3(-1f, 1f, 1f);
+                
             }
         }
     }

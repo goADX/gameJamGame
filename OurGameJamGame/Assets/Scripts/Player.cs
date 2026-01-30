@@ -82,11 +82,11 @@ public class Player : MonoBehaviour
 
             }
             
-            if(Physics2D.OverlapCircle(transform.position + new Vector3(0.55f, 0, 0), 0.1f, groundLayer) && velocity.x > 0)
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, 0, 0), 0.4f, groundLayer) && velocity.x > 0)
             {
                 velocity.x = Mathf.Min(0f, velocity.x);
             }
-            if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.55f, 0, 0), 0.1f, groundLayer) && velocity.x < 0)
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.5f, 0, 0), 0.4f, groundLayer) && velocity.x < 0)
             {
                 velocity.x = Mathf.Max(0f, velocity.x);
             }

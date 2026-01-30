@@ -102,12 +102,61 @@ public class MaskManager : MonoBehaviour
         if(currentMask != masks.none)
         {
             currentMaskScript.onUnequip();
+            //disable its equipments in a for lopp
+            if(currentMask == masks.PlagueMask)
+            {
+                foreach (var item in PlagueEquipments)
+                {
+                    item.SetActive(false);
+                }
+            }
+            else if(currentMask == masks.GoblinMask)
+            {
+                foreach (var item in KnightEquipments)
+                {
+                    item.SetActive(false);
+                }
+            }
+            else if(currentMask == masks.TimeBoyMask)
+            {
+                foreach (var item in TimeBoyEquipments)
+                {
+                    item.SetActive(false);
+                }
+            }
+            
         }
         currentMask = maskToEquip;
         if(currentMask != masks.none)
         {
+            
             currentMaskScript = masksScripts[(int)currentMask - 1];
             currentMaskScript.onEquip();
+
+            //enable its equipments in a for loop where you go through the array and enable each one in the game editor
+
+            if(maskToEquip == masks.PlagueMask)
+            {
+                foreach (var item in PlagueEquipments)
+                {
+                    item.SetActive(true);
+                }
+            }
+            else if(maskToEquip == masks.GoblinMask)
+            {
+                foreach (var item in KnightEquipments)
+                {
+                    item.SetActive(true);
+                }
+            }
+            else if(maskToEquip == masks.TimeBoyMask)
+            {
+                foreach (var item in TimeBoyEquipments)
+                {
+                    item.SetActive(true);
+                }
+            }
+            
         }
     }
 
