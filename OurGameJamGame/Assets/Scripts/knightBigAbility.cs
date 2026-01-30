@@ -5,9 +5,9 @@ using UnityEngine;
 public class knightBigAbility : MonoBehaviour
 {
     public LayerMask TargetablesMask;
-    public float FirstStageTime = 2f;
+    public float FirstStageTime = 1f;
     public GameObject FirstStageVFX;
-    public float SecondStageTime = 2f;
+    public float SecondStageTime = 1f;
     public GameObject SecondStageVFX;
 
     public GameObject DamageVFX;
@@ -38,12 +38,16 @@ public class knightBigAbility : MonoBehaviour
             EnemiesTargetedColliders = Physics2D.OverlapBoxAll(transform.position + new Vector3(facingRight?Range:-Range,0,0), new Vector3(Range,3f,1f), 0f, TargetablesMask);
             Instantiate(FirstStageVFX, transform.position, Quaternion.identity);
             CurrentStage = 1;
+            EnemiesTargeted = new GameObject[EnemiesTargetedColliders.Length];
         }else if(CurrentStage == 1&& Timer >= FirstStageTime)
         {
             //summon VFX on each enemy
+            int i = 0;
             foreach(Collider2D enemyCollider in EnemiesTargetedColliders)
             {
+                EnemiesTargeted[i] = enemyCollider.gameObject;
                 Instantiate(SecondStageVFX, enemyCollider.transform.position, Quaternion.identity);
+                i++;
             }
             CurrentStage = 2;
             Timer = 0f;
@@ -58,11 +62,12 @@ public class knightBigAbility : MonoBehaviour
             float FurthestDistance = 0f;
             foreach(Collider2D enemyCollider in EnemiesTargetedColliders)
             {
+                
                 //deal damage
                 EnemyScript enemyScript = enemyCollider.GetComponent<EnemyScript>();
                 if(enemyScript != null)
                 {
-                    enemyScript.health -= 50f; //deal 50 damage
+                    enemyScript.health -= 100f; //deal 100 damage
                 }
                 //find furthest enemy
                 float distance = Vector3.Distance(transform.position, enemyCollider.transform.position);
