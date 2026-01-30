@@ -16,6 +16,7 @@ public class PlayerAnimator : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private MaskManager maskManager;
     int currentFrameIndex = 0;
+    public float frameTimer = 0f;
     public masks maskType
     {
         get{ return maskManager.currentMask; }
@@ -49,9 +50,48 @@ public class PlayerAnimator : MonoBehaviour
                 break;
         }
 
+        Player player = GetComponent<Player>();
+        if (!player.isGrounded)
+        {
+            if(frameTimer >= 1f / framesPerSecondAir)
+            {
+                currentFrameIndex++;
+                if (currentFrameIndex > 12)
+                {
+                    currentFrameIndex = 9;
+                }
+                SetMaterialIndex(currentFrameIndex);
+                frameTimer = 0f;
+            }
+        }else if (Mathf.Abs(player.velocity.x) > 0.1f)
+        {
+            if(frameTimer >= 1f / framesPerSecondRun)
+            {
+                currentFrameIndex++;
+                if (currentFrameIndex > 7)
+                {
+                    currentFrameIndex = 4;
+                }
+                SetMaterialIndex(currentFrameIndex);
+                frameTimer = 0f;
+            }
+        }
+        else
+        {
+            if(frameTimer >= 1f / framesPerSecondIdle)
+            {
+                currentFrameIndex++;
+                if (currentFrameIndex > 3)
+                {
+                    currentFrameIndex = 0;
+                }
+                SetMaterialIndex(currentFrameIndex);
+                frameTimer = 0f;
+            }
+        }
 
 
-
+        frameTimer += Time.deltaTime;
     }
 
 

@@ -846,28 +846,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1408101441 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 602853533476089458, guid: dc95a514f7b788846aaebaa11fa61668,
-    type: 3}
-  m_PrefabInstance: {fileID: 3373409075145599590}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1408101448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1408101441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55db0c8b2bc9bf45bc9c33a0220ee11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: f1f0a697f47c9a5479718572912038a0, type: 2}
-  framesPerSecondIdle: 4
-  framesPerSecondRun: 10
-  framesPerSecondAir: 12
 --- !u!1 &1658510959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,11 +1511,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3048887934732533442, guid: dc95a514f7b788846aaebaa11fa61668,
-        type: 3}
-      propertyPath: m_Bindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9168868191218745789, guid: dc95a514f7b788846aaebaa11fa61668,
         type: 3}
       propertyPath: m_RootOrder
@@ -1596,9 +1569,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 602853533476089458, guid: dc95a514f7b788846aaebaa11fa61668,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1408101448}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc95a514f7b788846aaebaa11fa61668, type: 3}
