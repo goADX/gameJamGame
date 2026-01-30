@@ -138,7 +138,6 @@ public class EnemyScript : MonoBehaviour
         if(other.gameObject.layer == PlayerLayer)
         {
             //take damage
-            print("hello");
             other.GetComponent<Player>().ReciveDamage(Damage);
         }
     }
@@ -156,11 +155,5 @@ public class EnemyScript : MonoBehaviour
     {
         Destroy(gameObject);
 
-    }
-    private void OnCollisionEnter2D(Collision2D other) {
-    if(other.gameObject.layer == PlayerLayer)
-        {
-            other.gameObject.GetComponent<Player>().ReciveDamage(Damage);
-        }   
     }
 }
