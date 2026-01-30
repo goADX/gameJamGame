@@ -33,14 +33,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if(Physics2D.OverlapCircle(transform.position + new Vector3(0.55f, 0, 0), 0.1f, groundLayer) && velocity.x > 0)
-        {
-            velocity.x = Mathf.Min(0f, velocity.x);
-        }
-        else if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.55f, 0, 0), 0.1f, groundLayer) && velocity.x < 0)
-        {
-            velocity.x = Mathf.Max(0f, velocity.x);
-        }
+        
         if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.1f, groundLayer)&& velocity.y <= 0)
         {
             isGrounded = true;
@@ -89,7 +82,14 @@ public class Player : MonoBehaviour
 
             }
             
-                 
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(0.55f, 0, 0), 0.1f, groundLayer) && velocity.x > 0)
+            {
+                velocity.x = Mathf.Min(0f, velocity.x);
+            }
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.55f, 0, 0), 0.1f, groundLayer) && velocity.x < 0)
+            {
+                velocity.x = Mathf.Max(0f, velocity.x);
+            }
             
             
             
