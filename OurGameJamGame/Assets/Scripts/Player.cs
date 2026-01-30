@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
         }else
         {
             health -= DamageGot;
-   
+
         }
         if(health <= 0f)
         {
