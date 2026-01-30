@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
         ShootWhenInRange
     }
     public EnemyMovementType enemyMovementType;
+    public LayerMask PlayerLayer;
     public LayerMask PlayerAttacks;
     public LayerMask GroundMask;
     [Header("Stats")]
@@ -21,6 +22,11 @@ public class EnemyScript : MonoBehaviour
     [Header("Special Stats")]
     public float moveSpeed = 2f;
     public bool currentlyFacingRight = false;
+    public bool canFly = false;
+    public float gravity = 9.8f;
+    [Header("Trackers")]
+    public bool IsGrounded = false;
+    public Vector3 velocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +36,27 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canFly)
+        {
+            
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(0f, -0.5f, 0), 0.2f, GroundMask))
+            {
+                IsGrounded = true;
+            }
+            else
+            {
+                IsGrounded = false;
+            }
+            if(!IsGrounded)
+            {
+                velocity += new Vector3(0, -gravity, 0) * Time.deltaTime;
+                
+            }
+            else
+            {
+                velocity = new Vector3(velocity.x, Mathf.Max(velocity.y, 0f), 0f);
+            }
+        }
         switch(enemyMovementType)
         {
             case EnemyMovementType.Stationary:
@@ -39,14 +66,14 @@ public class EnemyScript : MonoBehaviour
                 //patrol code here
                 if(currentlyFacingRight)
                 {
-                    if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, -0.5f, 0), 0.1f, GroundMask) )
+                    if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, 0, 0), 0.1f, GroundMask) )
                     {
                      currentlyFacingRight = false;   
                     }
                 }
                 else
                 {
-                    if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, -0.5f, 0), 0.1f, GroundMask) )
+                    if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.5f, 0, 0), 0.1f, GroundMask) )
                     {
                      currentlyFacingRight = true;   
                     }
@@ -55,18 +82,38 @@ public class EnemyScript : MonoBehaviour
 
                 if (currentlyFacingRight)
                 {
-                    transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+                    velocity += Vector3.right * moveSpeed * Time.deltaTime;
 
                 }else
                 {
-                    transform.Translate(-Vector3.right * moveSpeed * Time.deltaTime);
+                    velocity += -Vector3.right * moveSpeed * Time.deltaTime;
                     
                 }
                 break;
             case EnemyMovementType.ChasePlayer:
                 //chase player code here
+                GameObject FoundPlayer = Physics2D.OverlapCircle(transform.position, 10f, PlayerLayer).gameObject;
+                if(FoundPlayer != null)
+                {
+
+                currentlyFacingRight =  FoundPlayer.transform.position.x > transform.position.x;
+                    
+                if (currentlyFacingRight)
+                {
+                    velocity += Vector3.right * moveSpeed * Time.deltaTime;
+
+                }else
+                {
+                    velocity += -Vector3.right * moveSpeed * Time.deltaTime;                        
+                }
+
+                }
+
+
                 break;
         }
+        transform.position += velocity * Time.deltaTime;
+        velocity += velocity * -0.1f * Time.deltaTime;
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.layer == PlayerAttacks)
@@ -94,5 +141,11 @@ public class EnemyScript : MonoBehaviour
     {
         Destroy(gameObject);
 
+    }
+    private void OnCollisionEnter2D(Collision2D other) {
+    if(other.gameObject.layer == PlayerLayer)
+        {
+            other.gameObject.GetComponent<Player>().ReciveDamage(Damage);
+        }   
     }
 }

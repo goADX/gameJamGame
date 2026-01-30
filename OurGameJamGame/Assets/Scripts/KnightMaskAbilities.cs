@@ -65,10 +65,11 @@ public class KnightMaskAbilities : Genral_Mask
 
     public override void GlobalUpdate()
     {
-        if (player.isGrounded)
+        if (player.isGrounded&&currentAttackBelowInstance != null)
         {
             currentAttackBelowInstance.GetComponent<SelfDestruct>().DestroySelf();
             currentAttackBelowInstance = null;
+            player.velocity = new Vector3(0f, 0f, 0f);
         }
     }
     public override void TryDoubleJump()

@@ -13,6 +13,7 @@ public class TimeBoyMaskScript : Genral_Mask
 
     public float PhaseDashRange = 10f;
     public float PhaseDashDamage = 100f;
+    public int CloneNumberOfSaves = 30;
 
     [Header("CoolDowns")]
     public float CloneRewindCooldown = 5f;
@@ -22,6 +23,8 @@ public class TimeBoyMaskScript : Genral_Mask
     public float lastPhaseDashTime = 3f;
     public GameObject ClosestEnemy;
     public bool isInPhaseDashMode = false;
+    public List<Vector3> clonesPositions = new List<Vector3>();
+    
 
     public override void OnInitiate(GameObject[] preferbs)
     {
@@ -57,6 +60,9 @@ public class TimeBoyMaskScript : Genral_Mask
     {
         player.transform.position = CurrentClone.transform.position;
         GameObject.Instantiate(TimeExplosionPrefab, CurrentClone.transform.position, Quaternion.identity);
+        lastCloneRewindTime = 0f;
+    
+    
     }
     public override void onEquip()
     {
@@ -69,10 +75,16 @@ public class TimeBoyMaskScript : Genral_Mask
     public override void passiveUpdate()
     {
         lastCloneRewindTime += Time.deltaTime;
+        CurrentClone.transform.position = clonesPositions[clonesPositions.Count - 1];
     }
     public override void GlobalUpdate()
     {
         lastPhaseDashTime += Time.deltaTime;
+        clonesPositions.Insert(0, player.transform.position);
+        if(clonesPositions.Count > CloneNumberOfSaves){
+            clonesPositions.RemoveAt(clonesPositions.Count - 1);
+        }
+
     }
     public override void TryDoubleJump()
     {
