@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.VFX;
 public class knightBigAbility : MonoBehaviour
 {
     public LayerMask TargetablesMask;
@@ -36,7 +36,8 @@ public class knightBigAbility : MonoBehaviour
         if(CurrentStage == 0)
         {
             EnemiesTargetedColliders = Physics2D.OverlapBoxAll(transform.position + new Vector3(facingRight?Range:-Range,0,0), new Vector3(Range,2f,1f), 0f, TargetablesMask);
-            Instantiate(FirstStageVFX, transform.position, Quaternion.identity);
+            GameObject firstStageVFXInstance = Instantiate(FirstStageVFX, transform.position, Quaternion.identity);
+            firstStageVFXInstance.GetComponent<VisualEffect>().SetFloat("Flip", facingRight?1f:0f);
             CurrentStage = 1;
             EnemiesTargeted = new GameObject[EnemiesTargetedColliders.Length];
         }else if(CurrentStage == 1&& Timer >= FirstStageTime)
