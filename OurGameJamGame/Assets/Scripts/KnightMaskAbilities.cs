@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class KnightMaskAbilities : Genral_Mask
 {
+    public GameObject SmallAttackPrefab;
+    public GameObject HeavyAttackPrefab;
+    public GameObject AttackBelowPrefab;
+    public GameObject ShieldPrefab;
+
+    public float DashDownForce = 10f;
+
+    [Header("Ability Cooldowns")]
+    public float SmallAttackCooldown = 1f;
+    public float HeavyAttackCooldown = 3f;
+
+    [Header("Ability Trackers")]
+    public float SmallAttackLastUsed = 1f;
+    public float HeavyAttackLastUsed = 3f;
     public override void OnInitiate(GameObject[] preferbs)
     {
         
@@ -40,6 +54,6 @@ public class KnightMaskAbilities : Genral_Mask
     }
     public override void TryDoubleJump()
     {
-        
+        player.velocity = new Vector3(player.velocity.x, -DashDownForce, 0f);
     }
 }
