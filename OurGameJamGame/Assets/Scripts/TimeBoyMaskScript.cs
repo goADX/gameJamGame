@@ -32,30 +32,32 @@ public class TimeBoyMaskScript : Genral_Mask
     }
     public override void ability1()
     {
-        if (!isInPhaseDashMode)
+    // 1. Check Cooldown
+    if (lastPhaseDashTime >= PhaseDashCooldown)
+    {
+        // 2. Find the closest enemy within range
+        GameObject closestEnemy = Physics2D.OverlapCircleAll(player.transform.position, PhaseDashRange, maskManager.EnemyMask)
+            .OrderBy(t => Vector3.Distance(t.transform.position, player.transform.position))
+            .FirstOrDefault()?.gameObject;
+
+        // 3. If an enemy is found, Dash and Attack
+        if (closestEnemy != null)
         {
-            if (lastPhaseDashTime >= PhaseDashCooldown)
-            {
-                
-                isInPhaseDashMode = true;
-                lastPhaseDashTime = 0f;
-            }
+            // Teleport to enemy position
+            player.transform.position = closestEnemy.transform.position;
 
+            // Deal Damage
+            closestEnemy.GetComponent<EnemyScript>().ReciveDamage(PhaseDashDamage);
 
-        }
-        else
-        {
-            ClosestEnemy = Physics2D.OverlapCircleAll(player.transform.position, PhaseDashRange, maskManager.EnemyMask)
-                .OrderBy(t => Vector3.Distance(t.transform.position, player.transform.position))
-                .FirstOrDefault()?.gameObject;
-
-            if (ClosestEnemy != null)
-            {
-                player.transform.position = ClosestEnemy.transform.position;
-                ClosestEnemy.GetComponent<EnemyScript>().ReciveDamage(PhaseDashDamage);
-            }
+            // Reset Cooldown
+            lastPhaseDashTime = 0f;
+            
+            // Optional: If you use this bool for animations, set it here
+            isInPhaseDashMode = true; 
         }
     }
+    }
+    
     public override void ability2()
     {
         player.transform.position = CurrentClone.transform.position;
