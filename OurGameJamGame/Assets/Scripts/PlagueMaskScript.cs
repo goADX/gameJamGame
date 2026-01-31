@@ -9,9 +9,11 @@ public class PlagueMaskScript : Genral_Mask
     [Header("CoolDowns")]
     public float doubleJumpCooldown = 1f;
     public int doubleJumpCharges = 2;
+    public float bombCooldown = 1f;
     [Header("Trackers")]
     public float lastDoubleJumpTime = 1f;
     public int DoubleJumpsUsed = 0;
+    public float lastBombTime = 0.7f;
     
 
     public override void OnInitiate(GameObject[] Preferbs)
@@ -21,6 +23,10 @@ public class PlagueMaskScript : Genral_Mask
 
     public override void ability1()
     {
+        if(lastBombTime < bombCooldown)
+        {
+            return;
+        }
         if(player.IsFacingRight)
             throwBomb(new Vector3(2f,0f,0f));
         else
@@ -33,6 +39,7 @@ public class PlagueMaskScript : Genral_Mask
                 player.velocity = new Vector3(player.velocity.x, 0.1f, 0f);
             }
         }
+        lastBombTime = 0f;
     }
 
     public override void ability2()
@@ -61,6 +68,7 @@ public class PlagueMaskScript : Genral_Mask
         {
             DoubleJumpsUsed = 0;
         }
+        lastBombTime += Time.deltaTime;
     }
 
     public override void TryDoubleJump()
