@@ -121,6 +121,10 @@ public class Player : MonoBehaviour
         {
             cameraObject.transform.position = new Vector3(transform.position.x, cameraObject.transform.position.y, cameraObject.transform.position.z);
         }
+        if(transform.position.magnitude > 10000f)
+        {
+            Die();
+        }
     }
 
     private void Jump()
