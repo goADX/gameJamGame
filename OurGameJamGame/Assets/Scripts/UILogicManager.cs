@@ -17,10 +17,13 @@ public class UILogicManager : MonoBehaviour
     }
 
     //
-
+    public void GoToMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
     public void StartGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("FirstLevel");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("PlayScene");
     }
 
 

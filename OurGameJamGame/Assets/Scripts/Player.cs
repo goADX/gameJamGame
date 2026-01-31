@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public GameObject cameraObject;
     public Vector3 velocity;
     public float speed = 5f;
     public float jumpForce = 10f;
@@ -114,6 +115,12 @@ public class Player : MonoBehaviour
         //apply drag
         if(isGrounded)
         velocity -= 1f * velocity * Mathf.Min(Time.deltaTime*1.2f, 1f);
+
+
+        if(cameraObject != null)
+        {
+            cameraObject.transform.position = new Vector3(transform.position.x, cameraObject.transform.position.y, cameraObject.transform.position.z);
+        }
     }
 
     private void Jump()
