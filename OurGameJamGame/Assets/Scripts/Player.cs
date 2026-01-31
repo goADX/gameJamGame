@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public GameObject cameraObject;
     public Vector3 velocity;
     public float speed = 5f;
     public float jumpForce = 10f;
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour
     {
 
         
-        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.1f, groundLayer)&& velocity.y <= 0)
+        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.7f, 0), 0.1f, groundLayer)&& velocity.y <= 0)
         {
             isGrounded = true;
         }
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
             //apply gravity
-            velocity += new Vector3(Physics2D.gravity.x, Physics2D.gravity.y, 0) * Time.deltaTime;
+            velocity += new Vector3(Physics2D.gravity.x, Physics2D.gravity.y*1.8f, 0) * Time.deltaTime;
             
         }
 
@@ -53,14 +54,22 @@ public class Player : MonoBehaviour
         }
         
         
-        if (isGrounded)
+        if (isGrounded||true)
         {   
-            if(velocity.y < 0)
+            if(velocity.y < 0&& isGrounded)
             {
                 velocity = new Vector3(velocity.x, 0, 0);
             }
 
             float moveInput = Input.GetAxis("Horizontal");
+
+            if(moveInput > 0)
+            {
+                IsFacingRight = true;
+            }else if(moveInput < 0)
+            {
+                IsFacingRight = false;
+            }
             //print(moveInput);
             if(moveInput != 0)
             {
@@ -83,23 +92,26 @@ public class Player : MonoBehaviour
 
             }
             
-            if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, 0, 0), 0.4f, groundLayer) && velocity.x > 0)
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(0.2f, 0, 0), 0.4f, groundLayer) && velocity.x > 0)
             {
                 velocity.x = Mathf.Min(0f, velocity.x);
             }
-            if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.5f, 0, 0), 0.4f, groundLayer) && velocity.x < 0)
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.2f, 0, 0), 0.4f, groundLayer) && velocity.x < 0)
             {
                 velocity.x = Mathf.Max(0f, velocity.x);
             }
-            if (transform.position.x >= 18f)
+            if(MainCamera != null)
             {
-            // LOCK CAMERA: Stay at this specific spot
-                MainCamera.transform.position = new Vector3(29.53f, 1f, -10f);
-            }
-            else
-            {
-                // FOLLOW PLAYER: Standard movement
-                MainCamera.transform.position = new Vector3(3.4f, 1f, -10f);
+                if (transform.position.x >= 18f)
+                {
+                // LOCK CAMERA: Stay at this specific spot
+                    MainCamera.transform.position = new Vector3(29.53f, 1f, -10f);
+                }
+                else
+                {
+                    // FOLLOW PLAYER: Standard movement
+                    MainCamera.transform.position = new Vector3(3.4f, 1f, -10f);
+                }
             }
             
             
@@ -113,7 +125,22 @@ public class Player : MonoBehaviour
         transform.position +=  velocity * Time.deltaTime;
         //apply drag
         if(isGrounded)
-        velocity -= 1f * velocity * Mathf.Min(Time.deltaTime*1.2f, 1f);
+        velocity -= 1f * velocity * Mathf.Min(Time.deltaTime*1.7f, 1f);
+
+
+        if(cameraObject != null)
+        {
+            cameraObject.transform.position = new Vector3(transform.position.x, cameraObject.transform.position.y, cameraObject.transform.position.z);
+        }
+        if(transform.position.magnitude > 10000f)
+        {
+            Die();
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            RestartGame();
+        }
+        
     }
 
     private void Jump()

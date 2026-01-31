@@ -17,7 +17,7 @@ public class EnemyScript : MonoBehaviour
     public LayerMask PlayerAttacks;
     public LayerMask GroundMask;
     [Header("Stats")]
-    public float health = 100f;
+    public float health = 1f;
     public float Damage = 10f;
     [Header("Special Stats")]
     public float moveSpeed = 2f;
@@ -28,10 +28,11 @@ public class EnemyScript : MonoBehaviour
     public bool IsGrounded = false;
     public bool IsWallGrounded = false;
     public Vector3 velocity;
+    public SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -50,7 +51,7 @@ public class EnemyScript : MonoBehaviour
             }
             if(!IsGrounded)
             {
-                velocity.y -= gravity * Time.deltaTime;
+                velocity.y -= gravity * Mathf.Min(Time.deltaTime, 0.05f);
                 
             }
             else if (velocity.y < 0)
@@ -77,6 +78,7 @@ public class EnemyScript : MonoBehaviour
                     if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, 0, 0), 0.1f, GroundMask) )
                     {
                      currentlyFacingRight = false;   
+
                     }
                 }
                 else
@@ -108,11 +110,11 @@ public class EnemyScript : MonoBehaviour
                     
                 if (currentlyFacingRight)
                 {
-                    velocity += Vector3.right * moveSpeed * Time.deltaTime;
+                    velocity += Vector3.right * moveSpeed * Mathf.Min(Time.deltaTime, 0.05f);
 
                 }else
                 {
-                    velocity -= Vector3.right * moveSpeed * Time.deltaTime;                        
+                    velocity -= Vector3.right * moveSpeed * Mathf.Min(Time.deltaTime, 0.05f);                        
                 }
 
                 }
@@ -120,14 +122,20 @@ public class EnemyScript : MonoBehaviour
 
                 break;
         }
-        transform.position += velocity * Time.deltaTime;
+        spriteRenderer.flipX = currentlyFacingRight;
+        transform.position += velocity * Mathf.Min(Time.deltaTime, 0.05f);
         velocity += velocity * -0.1f * Time.deltaTime;
+        if(health <= 0f)
+        {
+           Die();
+        }
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.layer == PlayerAttacks)
+        print("Collided with " + other.gameObject.layer+" and player attacks layer is "+ PlayerAttacks);
+        if((PlayerAttacks & (1 << other.gameObject.layer)) != 0)
         {
             //take damage
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             ReciveDamage(other.GetComponent<PlayerAttacksScript>().Damage);
             if(health <= 0f)
             {
@@ -136,11 +144,22 @@ public class EnemyScript : MonoBehaviour
         }
     }
     private void OnCollisionEnter2D(Collision2D other) {
-        if(( other.gameObject.layer & (1 << PlayerLayer)) != 0)
+        if(((1 << other.gameObject.layer) & PlayerLayer) != 0)
         {
             //take damage
             print("Damge taken");
             other.gameObject.GetComponent<Player>().ReciveDamage(Damage);
+            //
+        }else if((PlayerAttacks & (1 << other.gameObject.layer)) != 0)
+        {
+            
+            //take damage
+            //Destroy(other.gameObject);
+            ReciveDamage(other.gameObject.GetComponent<PlayerAttacksScript>().Damage);
+            if(health <= 0f)
+            {
+               Die();
+            }
         }
         
     }

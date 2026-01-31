@@ -86,7 +86,7 @@ public class MaskManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Q)|| Input.GetKeyDown(KeyCode.Mouse0))
         {
-            ability2();
+            //ability2();
         }
         
         foreach (var mask in masksScripts)

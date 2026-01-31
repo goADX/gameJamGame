@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlagueMaskScript : Genral_Mask
 {
-    public float doubleJumpForce = 5f;
+    public float doubleJumpForce = 7f;
     public GameObject bombPrefab;
     [Header("CoolDowns")]
     public float doubleJumpCooldown = 1f;
@@ -22,9 +22,9 @@ public class PlagueMaskScript : Genral_Mask
     public override void ability1()
     {
         if(player.IsFacingRight)
-            throwBomb(new Vector3(1f,0f,0f));
+            throwBomb(new Vector3(2f,0f,0f));
         else
-            throwBomb(new Vector3(-1f,0f,0f));
+            throwBomb(new Vector3(-2f,0f,0f));
         
         if (!player.isGrounded)
         {
@@ -75,19 +75,19 @@ public class PlagueMaskScript : Genral_Mask
         player.velocity.y = doubleJumpForce;
         if(player.velocity.x == 0f)
         {
-            throwBomb(new Vector3(0f,-1f,0f));
+            throwBomb(new Vector3(0f,-1.5f,0f));
         }else
         if(player.velocity.x < 0f)
         {
-            throwBomb(new Vector3(-0.5f,-1f,0f));
+            throwBomb(new Vector3(-1f,-1.5f,0f));
         }else
         {
-            throwBomb(new Vector3(0.5f,-1f,0f));
+            throwBomb(new Vector3(1f,-1.5f,0f));
         }
         
     }
     public void throwBomb(Vector3 direction)
     {
-        
+        GameObject.Instantiate(bombPrefab, direction + player.transform.position, Quaternion.identity);
     }
 }

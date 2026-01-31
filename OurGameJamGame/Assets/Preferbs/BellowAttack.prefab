@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1714554101949118374}
   - component: {fileID: 393387348940223212}
   - component: {fileID: 1619781257349304469}
+  - component: {fileID: -4063578007453636509}
   m_Layer: 9
   m_Name: BellowAttack
   m_TagString: Untagged
@@ -184,3 +185,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeToDestruct: 5
   SummonedAfterDestruct: {fileID: 0}
+--- !u!114 &-4063578007453636509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534635876550849138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6472ce8d03abd24aba62ea987d6cf5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 50

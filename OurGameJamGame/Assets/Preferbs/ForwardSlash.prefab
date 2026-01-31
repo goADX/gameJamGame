@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7924959995359163544}
   - component: {fileID: 8316366949871889713}
   - component: {fileID: 5969412516017210310}
+  - component: {fileID: -7018247489042502023}
   m_Layer: 9
   m_Name: ForwardSlash
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2469518716695907044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -158,3 +159,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0.95, y: -0.09}
   m_Size: {x: 3.4, y: 1.66}
   m_Direction: 1
+--- !u!114 &-7018247489042502023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2469518716695907044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6472ce8d03abd24aba62ea987d6cf5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 50
