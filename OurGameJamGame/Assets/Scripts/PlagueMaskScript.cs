@@ -22,9 +22,9 @@ public class PlagueMaskScript : Genral_Mask
     public override void ability1()
     {
         if(player.IsFacingRight)
-            throwBomb(new Vector3(1f,0f,0f));
+            throwBomb(new Vector3(2f,0f,0f));
         else
-            throwBomb(new Vector3(-1f,0f,0f));
+            throwBomb(new Vector3(-2f,0f,0f));
         
         if (!player.isGrounded)
         {
@@ -75,14 +75,14 @@ public class PlagueMaskScript : Genral_Mask
         player.velocity.y = doubleJumpForce;
         if(player.velocity.x == 0f)
         {
-            throwBomb(new Vector3(0f,-1f,0f));
+            throwBomb(new Vector3(0f,-1.5f,0f));
         }else
         if(player.velocity.x < 0f)
         {
-            throwBomb(new Vector3(-0.5f,-1f,0f));
+            throwBomb(new Vector3(-1f,-1.5f,0f));
         }else
         {
-            throwBomb(new Vector3(0.5f,-1f,0f));
+            throwBomb(new Vector3(1f,-1.5f,0f));
         }
         
     }

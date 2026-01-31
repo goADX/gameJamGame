@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     {
 
         
-        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.55f, 0), 0.1f, groundLayer)&& velocity.y <= 0)
+        if(Physics2D.OverlapCircle(transform.position + new Vector3(0, -0.7f, 0), 0.1f, groundLayer)&& velocity.y <= 0)
         {
             isGrounded = true;
         }
@@ -54,14 +54,22 @@ public class Player : MonoBehaviour
         }
         
         
-        if (isGrounded)
+        if (isGrounded||true)
         {   
-            if(velocity.y < 0)
+            if(velocity.y < 0&& isGrounded)
             {
                 velocity = new Vector3(velocity.x, 0, 0);
             }
 
             float moveInput = Input.GetAxis("Horizontal");
+
+            if(moveInput > 0)
+            {
+                IsFacingRight = true;
+            }else if(moveInput < 0)
+            {
+                IsFacingRight = false;
+            }
             //print(moveInput);
             if(moveInput != 0)
             {
@@ -92,15 +100,18 @@ public class Player : MonoBehaviour
             {
                 velocity.x = Mathf.Max(0f, velocity.x);
             }
-            if (transform.position.x >= 18f)
+            if(MainCamera != null)
             {
-            // LOCK CAMERA: Stay at this specific spot
-                MainCamera.transform.position = new Vector3(29.53f, 1f, -10f);
-            }
-            else
-            {
-                // FOLLOW PLAYER: Standard movement
-                MainCamera.transform.position = new Vector3(3.4f, 1f, -10f);
+                if (transform.position.x >= 18f)
+                {
+                // LOCK CAMERA: Stay at this specific spot
+                    MainCamera.transform.position = new Vector3(29.53f, 1f, -10f);
+                }
+                else
+                {
+                    // FOLLOW PLAYER: Standard movement
+                    MainCamera.transform.position = new Vector3(3.4f, 1f, -10f);
+                }
             }
             
             
@@ -125,6 +136,11 @@ public class Player : MonoBehaviour
         {
             Die();
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            RestartGame();
+        }
+        
     }
 
     private void Jump()

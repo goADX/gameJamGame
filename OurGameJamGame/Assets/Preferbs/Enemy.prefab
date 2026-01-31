@@ -153,7 +153,7 @@ MonoBehaviour:
     m_Bits: 512
   GroundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   health: 1
   Damage: 10
   moveSpeed: 2
@@ -163,6 +163,7 @@ MonoBehaviour:
   IsGrounded: 0
   IsWallGrounded: 0
   velocity: {x: 0, y: 0, z: 0}
+  spriteRenderer: {fileID: 0}
 --- !u!50 &7879944813306064974
 Rigidbody2D:
   serializedVersion: 4

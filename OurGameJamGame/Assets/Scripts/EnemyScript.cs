@@ -122,7 +122,7 @@ public class EnemyScript : MonoBehaviour
 
                 break;
         }
-        spriteRenderer.flipX = !currentlyFacingRight;
+        spriteRenderer.flipX = currentlyFacingRight;
         transform.position += velocity * Time.deltaTime;
         velocity += velocity * -0.1f * Time.deltaTime;
         if(health <= 0f)
@@ -131,7 +131,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.layer == PlayerAttacks)
+        if(((1 << other.gameObject.layer) & PlayerAttacks) != 0)
         {
             //take damage
             Destroy(other.gameObject);
