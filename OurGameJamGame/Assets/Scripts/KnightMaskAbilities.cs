@@ -94,5 +94,7 @@ public class KnightMaskAbilities : Genral_Mask
         player.velocity = new Vector3(player.velocity.x, -DashDownForce, 0f);
         
         currentAttackBelowInstance = GameObject.Instantiate(AttackBelowPrefab, player.transform.position + new Vector3(0f, 0, 0f), Quaternion.identity);
+        //set it as the child of the player
+        currentAttackBelowInstance.transform.parent = player.transform;
     }
 }
