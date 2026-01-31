@@ -29,6 +29,7 @@ public class EnemyScript : MonoBehaviour
     public bool IsWallGrounded = false;
     public Vector3 velocity;
     public SpriteRenderer spriteRenderer;
+    public float checkRangeAdded = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +42,7 @@ public class EnemyScript : MonoBehaviour
         if (!canFly)
         {
             
-            if(Physics2D.OverlapCircle(transform.position + new Vector3(0f, -0.5f, 0), 0f, GroundMask))
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(0f, -0.5f-checkRangeAdded, 0), 0f+checkRangeAdded*0.2f, GroundMask))
             {
                 IsGrounded = true;
             }
@@ -59,9 +60,9 @@ public class EnemyScript : MonoBehaviour
             velocity.y = 0;
             }
 
-            Vector3 wallCheckPos = currentlyFacingRight ? new Vector3(0.5f, 0, 0) : new Vector3(-0.5f, 0, 0);
+            Vector3 wallCheckPos = currentlyFacingRight ? new Vector3(0.5f+checkRangeAdded, 0, 0) : new Vector3(-0.5f-checkRangeAdded, 0, 0);
 
-            if (Physics2D.OverlapCircle(transform.position + wallCheckPos, 0.1f, GroundMask))
+            if (Physics2D.OverlapCircle(transform.position + wallCheckPos, 0.1f+checkRangeAdded*0.1f, GroundMask))
             {
                 velocity.x = 0;
             }
@@ -75,7 +76,7 @@ public class EnemyScript : MonoBehaviour
                 //patrol code here
                 if(currentlyFacingRight)
                 {
-                    if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, 0, 0), 0.1f, GroundMask) )
+                    if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f+checkRangeAdded, 0, 0), 0.1f+checkRangeAdded*0.25f, GroundMask) )
                     {
                      currentlyFacingRight = false;   
 
@@ -83,7 +84,7 @@ public class EnemyScript : MonoBehaviour
                 }
                 else
                 {
-                    if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.5f, 0, 0), 0.1f, GroundMask) )
+                    if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.5f-checkRangeAdded, 0, 0), 0.1f+checkRangeAdded*0.25f, GroundMask) )
                     {
                      currentlyFacingRight = true;   
                     }
@@ -166,7 +167,7 @@ public class EnemyScript : MonoBehaviour
 
     public void ReciveDamage(float DamageGot)
     {
-        health -= DamageGot;
+        health -= 1;
         if(health <= 0f)
         {
            Die();
