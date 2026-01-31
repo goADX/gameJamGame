@@ -131,11 +131,11 @@ public class EnemyScript : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        
+        print("Collided with " + other.gameObject.layer+" and player attacks layer is "+ PlayerAttacks);
         if((PlayerAttacks & (1 << other.gameObject.layer)) != 0)
         {
             //take damage
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             ReciveDamage(other.GetComponent<PlayerAttacksScript>().Damage);
             if(health <= 0f)
             {
@@ -149,6 +149,17 @@ public class EnemyScript : MonoBehaviour
             //take damage
             print("Damge taken");
             other.gameObject.GetComponent<Player>().ReciveDamage(Damage);
+            //
+        }else if((PlayerAttacks & (1 << other.gameObject.layer)) != 0)
+        {
+            
+            //take damage
+            //Destroy(other.gameObject);
+            ReciveDamage(other.gameObject.GetComponent<PlayerAttacksScript>().Damage);
+            if(health <= 0f)
+            {
+               Die();
+            }
         }
         
     }
