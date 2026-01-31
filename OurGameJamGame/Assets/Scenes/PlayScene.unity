@@ -602,7 +602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88451202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: -14.38, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1212,8 +1212,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525496121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.61, y: -4.01, z: 0}
-  m_LocalScale: {x: 20.923, y: 1, z: 1}
+  m_LocalPosition: {x: -7.992, y: -4.01, z: 0}
+  m_LocalScale: {x: 35.68627, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1796,8 +1796,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767388676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.8, y: -0.02, z: 0}
-  m_LocalScale: {x: 22.492226, y: 1, z: 1}
+  m_LocalPosition: {x: 18.6409, y: -0.02, z: 0}
+  m_LocalScale: {x: 22.810854, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2000,7 +2000,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876405147}
   m_LocalRotation: {x: -0, y: -0, z: -0.70426005, w: 0.7099421}
-  m_LocalPosition: {x: -11.78, y: 0.34, z: 0}
+  m_LocalPosition: {x: -26.03, y: 1.76, z: 0}
   m_LocalScale: {x: 124.9396, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2115,7 +2115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -583.79, y: -299.1}
+  m_AnchoredPosition: {x: -579.71, y: -301.07}
   m_SizeDelta: {x: 10.9783, y: 5.1961}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &951923462
@@ -2600,7 +2600,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -593.5, y: -300.33}
+  m_AnchoredPosition: {x: -609.3, y: -300.33}
   m_SizeDelta: {x: 10.9783, y: 5.1961}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1326071089
@@ -2671,7 +2671,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 3.63
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -2744,7 +2744,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -557.28, y: -297.47}
+  m_AnchoredPosition: {x: -594.36, y: -302.17}
   m_SizeDelta: {x: 10.9783, y: 5.1961}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1386794847
@@ -2772,7 +2772,7 @@ MonoBehaviour:
     spam e in the air to stay there for
     longer
 
-    u can double jump twice'
+    u can double jump twice with this mask'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2799,19 +2799,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.8
+  m_fontSizeBase: 0.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 10.03
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -3011,12 +3011,12 @@ PrefabInstance:
     - target: {fileID: 9168868191218745789, guid: dc95a514f7b788846aaebaa11fa61668,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.43
+      value: -16.9
       objectReference: {fileID: 0}
     - target: {fileID: 9168868191218745789, guid: dc95a514f7b788846aaebaa11fa61668,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.35
+      value: -0.94
       objectReference: {fileID: 0}
     - target: {fileID: 9168868191218745789, guid: dc95a514f7b788846aaebaa11fa61668,
         type: 3}

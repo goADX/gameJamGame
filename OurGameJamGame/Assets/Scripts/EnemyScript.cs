@@ -51,7 +51,7 @@ public class EnemyScript : MonoBehaviour
             }
             if(!IsGrounded)
             {
-                velocity.y -= gravity * Time.deltaTime;
+                velocity.y -= gravity * Mathf.Min(Time.deltaTime, 0.05f);
                 
             }
             else if (velocity.y < 0)
@@ -110,11 +110,11 @@ public class EnemyScript : MonoBehaviour
                     
                 if (currentlyFacingRight)
                 {
-                    velocity += Vector3.right * moveSpeed * Time.deltaTime;
+                    velocity += Vector3.right * moveSpeed * Mathf.Min(Time.deltaTime, 0.05f);
 
                 }else
                 {
-                    velocity -= Vector3.right * moveSpeed * Time.deltaTime;                        
+                    velocity -= Vector3.right * moveSpeed * Mathf.Min(Time.deltaTime, 0.05f);                        
                 }
 
                 }
@@ -123,7 +123,7 @@ public class EnemyScript : MonoBehaviour
                 break;
         }
         spriteRenderer.flipX = currentlyFacingRight;
-        transform.position += velocity * Time.deltaTime;
+        transform.position += velocity * Mathf.Min(Time.deltaTime, 0.05f);
         velocity += velocity * -0.1f * Time.deltaTime;
         if(health <= 0f)
         {
@@ -131,7 +131,8 @@ public class EnemyScript : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(((1 << other.gameObject.layer) & PlayerAttacks) != 0)
+        
+        if((PlayerAttacks & (1 << other.gameObject.layer)) != 0)
         {
             //take damage
             Destroy(other.gameObject);
@@ -143,7 +144,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
     private void OnCollisionEnter2D(Collision2D other) {
-        if(( other.gameObject.layer & (1 << PlayerLayer)) != 0)
+        if(((1 << other.gameObject.layer) & PlayerLayer) != 0)
         {
             //take damage
             print("Damge taken");

@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
             //apply gravity
-            velocity += new Vector3(Physics2D.gravity.x, Physics2D.gravity.y, 0) * Time.deltaTime;
+            velocity += new Vector3(Physics2D.gravity.x, Physics2D.gravity.y*1.8f, 0) * Time.deltaTime;
             
         }
 
@@ -92,11 +92,11 @@ public class Player : MonoBehaviour
 
             }
             
-            if(Physics2D.OverlapCircle(transform.position + new Vector3(0.5f, 0, 0), 0.4f, groundLayer) && velocity.x > 0)
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(0.2f, 0, 0), 0.4f, groundLayer) && velocity.x > 0)
             {
                 velocity.x = Mathf.Min(0f, velocity.x);
             }
-            if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.5f, 0, 0), 0.4f, groundLayer) && velocity.x < 0)
+            if(Physics2D.OverlapCircle(transform.position + new Vector3(-0.2f, 0, 0), 0.4f, groundLayer) && velocity.x < 0)
             {
                 velocity.x = Mathf.Max(0f, velocity.x);
             }
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
         transform.position +=  velocity * Time.deltaTime;
         //apply drag
         if(isGrounded)
-        velocity -= 1f * velocity * Mathf.Min(Time.deltaTime*1.2f, 1f);
+        velocity -= 1f * velocity * Mathf.Min(Time.deltaTime*1.7f, 1f);
 
 
         if(cameraObject != null)

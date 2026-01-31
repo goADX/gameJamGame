@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlagueMaskScript : Genral_Mask
 {
-    public float doubleJumpForce = 5f;
+    public float doubleJumpForce = 7f;
     public GameObject bombPrefab;
     [Header("CoolDowns")]
     public float doubleJumpCooldown = 1f;
